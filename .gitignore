@@ -149,3 +149,6 @@ Thumbs.db
 # Paper and documentation (excluded from main repo)
 paper/
 docs/build/
+
+# Experimental results
+results/
