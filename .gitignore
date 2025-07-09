@@ -128,11 +128,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Dataset files
-dataset/processed/
-dataset/ECL_extracted/
-dataset/GEFCom2014_extracted/
-dataset/*.zip
+# Dataset files (exclude entire dataset folder)
+dataset/
 
 # Results and logs
 results/
