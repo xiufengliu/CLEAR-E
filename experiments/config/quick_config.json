@@ -1,0 +1,130 @@
+{
+  "experiment_name": "CLEAR-E Quick Evaluation",
+  "description": "Quick experimental evaluation for testing and development",
+  
+  "data_config": {
+    "lookback": 168,
+    "horizon": 24,
+    "test_split": 0.2,
+    "val_split": 0.2,
+    "normalize": true,
+    "handle_missing": "interpolate"
+  },
+  
+  "statistical_config": {
+    "n_runs": 2,
+    "confidence_level": 0.95,
+    "significance_level": 0.05,
+    "random_seed": 42,
+    "cross_validation": {
+      "method": "expanding_window",
+      "n_splits": 2
+    }
+  },
+  
+  "model_config": {
+    "clear_e": {
+      "hidden_dim": 64,
+      "concept_dim": 32,
+      "bottleneck_dim": 16,
+      "memory_size": 5,
+      "momentum": 0.9,
+      "penalty_weight": 1.4,
+      "frozen_phase_length": 20,
+      "unfrozen_phase_length": 10
+    },
+    "baselines": {
+      "lstm": {
+        "hidden_dim": 64,
+        "num_layers": 1,
+        "dropout": 0.1
+      },
+      "transformer": {
+        "d_model": 64,
+        "nhead": 4,
+        "num_layers": 2,
+        "dropout": 0.1
+      },
+      "proceed": {
+        "hidden_dim": 64,
+        "concept_dim": 32
+      }
+    }
+  },
+  
+  "training_config": {
+    "batch_size": 16,
+    "learning_rate": 0.001,
+    "max_epochs": 20,
+    "early_stopping_patience": 5,
+    "gradient_clip_norm": 1.0,
+    "weight_decay": 1e-5
+  },
+  
+  "evaluation_config": {
+    "metrics": [
+      "rmse",
+      "mae", 
+      "mape"
+    ],
+    "drift_scenarios": [
+      "seasonal_transition",
+      "demand_response_event"
+    ],
+    "ablation_components": [
+      "energy_metadata",
+      "drift_memory"
+    ]
+  },
+  
+  "computational_config": {
+    "measure_efficiency": true,
+    "measure_scalability": false,
+    "profile_memory": false,
+    "benchmark_inference": true
+  },
+  
+  "output_config": {
+    "save_results": true,
+    "generate_plots": false,
+    "create_latex_tables": true,
+    "save_models": false,
+    "verbose": true,
+    "log_level": "INFO"
+  },
+  
+  "datasets": {
+    "ECL": {
+      "enabled": true,
+      "priority": "high",
+      "description": "Electricity Consuming Load dataset"
+    },
+    "GEFCom2014": {
+      "enabled": true,
+      "priority": "high", 
+      "description": "Global Energy Forecasting Competition dataset"
+    },
+    "ISO-NE": {
+      "enabled": false,
+      "priority": "low",
+      "description": "Independent System Operator New England dataset"
+    },
+    "ETTm1": {
+      "enabled": false,
+      "priority": "low",
+      "description": "Electricity Transformer Temperature (15-min)"
+    },
+    "ETTh1": {
+      "enabled": false,
+      "priority": "low",
+      "description": "Electricity Transformer Temperature (hourly)"
+    }
+  },
+  
+  "hardware_config": {
+    "use_gpu": true,
+    "mixed_precision": false,
+    "num_workers": 2,
+    "pin_memory": true
+  }
+}

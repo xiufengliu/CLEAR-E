@@ -1,0 +1,156 @@
+{
+  "experiment_name": "CLEAR-E Comprehensive Evaluation",
+  "description": "Full experimental evaluation for IEEE Transactions on Smart Grid submission",
+  
+  "data_config": {
+    "lookback": 168,
+    "horizon": 24,
+    "test_split": 0.2,
+    "val_split": 0.2,
+    "normalize": true,
+    "handle_missing": "interpolate"
+  },
+  
+  "statistical_config": {
+    "n_runs": 5,
+    "confidence_level": 0.95,
+    "significance_level": 0.05,
+    "random_seed": 42,
+    "cross_validation": {
+      "method": "expanding_window",
+      "n_splits": 5
+    }
+  },
+  
+  "model_config": {
+    "clear_e": {
+      "hidden_dim": 128,
+      "concept_dim": 64,
+      "bottleneck_dim": 32,
+      "memory_size": 10,
+      "momentum": 0.9,
+      "penalty_weight": 1.4,
+      "frozen_phase_length": 100,
+      "unfrozen_phase_length": 20
+    },
+    "baselines": {
+      "lstm": {
+        "hidden_dim": 128,
+        "num_layers": 2,
+        "dropout": 0.2
+      },
+      "transformer": {
+        "d_model": 128,
+        "nhead": 8,
+        "num_layers": 6,
+        "dropout": 0.1
+      },
+      "patchtst": {
+        "patch_size": 16,
+        "d_model": 128,
+        "nhead": 8,
+        "num_layers": 3
+      },
+      "dlinear": {
+        "kernel_size": 25
+      },
+      "proceed": {
+        "hidden_dim": 128,
+        "concept_dim": 64
+      }
+    }
+  },
+  
+  "training_config": {
+    "batch_size": 32,
+    "learning_rate": 0.001,
+    "max_epochs": 100,
+    "early_stopping_patience": 10,
+    "gradient_clip_norm": 1.0,
+    "weight_decay": 1e-5,
+    "scheduler": {
+      "type": "cosine",
+      "T_max": 100,
+      "eta_min": 1e-6
+    }
+  },
+  
+  "evaluation_config": {
+    "metrics": [
+      "rmse",
+      "mae", 
+      "mape",
+      "peak_load_error",
+      "energy_balance_error"
+    ],
+    "drift_scenarios": [
+      "seasonal_transition",
+      "demand_response_event", 
+      "extreme_weather",
+      "economic_disruption"
+    ],
+    "ablation_components": [
+      "energy_metadata",
+      "lightweight_adaptation",
+      "drift_memory",
+      "energy_loss",
+      "attention_mechanism"
+    ]
+  },
+  
+  "computational_config": {
+    "measure_efficiency": true,
+    "measure_scalability": true,
+    "profile_memory": true,
+    "benchmark_inference": true,
+    "scalability_scenarios": [
+      {"name": "single_feeder", "customers": 100},
+      {"name": "distribution_network", "customers": 1000},
+      {"name": "regional_grid", "customers": 10000}
+    ]
+  },
+  
+  "output_config": {
+    "save_results": true,
+    "generate_plots": true,
+    "create_latex_tables": true,
+    "save_models": false,
+    "verbose": true,
+    "log_level": "INFO"
+  },
+  
+  "datasets": {
+    "ECL": {
+      "enabled": true,
+      "priority": "high",
+      "description": "Electricity Consuming Load dataset"
+    },
+    "GEFCom2014": {
+      "enabled": true,
+      "priority": "high", 
+      "description": "Global Energy Forecasting Competition dataset"
+    },
+    "ISO-NE": {
+      "enabled": true,
+      "priority": "medium",
+      "description": "Independent System Operator New England dataset"
+    },
+    "ETTm1": {
+      "enabled": true,
+      "priority": "medium",
+      "description": "Electricity Transformer Temperature (15-min)"
+    },
+    "ETTh1": {
+      "enabled": true,
+      "priority": "low",
+      "description": "Electricity Transformer Temperature (hourly)"
+    }
+  },
+  
+  "hardware_config": {
+    "use_gpu": true,
+    "mixed_precision": false,
+    "num_workers": 4,
+    "pin_memory": true
+  }
+}
