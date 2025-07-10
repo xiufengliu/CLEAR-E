@@ -77,7 +77,7 @@ The framework evaluates on five diverse energy datasets:
 
 - **ECL**: Electricity Consuming Load (321 clients, 2012-2014)
 - **GEFCom2014**: Global Energy Forecasting Competition dataset
-- **ISO-NE**: Independent System Operator New England data
+- **Southern China**: Regional transformer load data with meteorological information
 - **ETTm1/ETTh1**: Electricity Transformer Temperature datasets
 
 Each dataset includes comprehensive metadata:

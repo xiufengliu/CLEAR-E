@@ -18,7 +18,7 @@ for mid in 150
 do
 for btl in 48
 do
-for pred_len in 24 48 96
+for pred_len in 24
 do
 for learning_rate in 0.001
 do

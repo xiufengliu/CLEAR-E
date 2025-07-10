@@ -130,10 +130,10 @@
       "priority": "high", 
       "description": "Global Energy Forecasting Competition dataset"
     },
-    "ISO-NE": {
+    "Southern China": {
       "enabled": true,
       "priority": "medium",
-      "description": "Independent System Operator New England dataset"
+      "description": "Southern China regional transformer load dataset"
     },
     "ETTm1": {
       "enabled": true,
@@ -141,6 +141,16 @@
       "description": "Electricity Transformer Temperature (15-min)"
     },
     "ETTh1": {
+      "enabled": true,
+      "priority": "medium",
+      "description": "Electricity Transformer Temperature (hourly)"
+    },
+    "ETTm2": {
+      "enabled": true,
+      "priority": "low",
+      "description": "Electricity Transformer Temperature (15-min)"
+    },
+    "ETTh2": {
       "enabled": true,
       "priority": "low",
       "description": "Electricity Transformer Temperature (hourly)"
