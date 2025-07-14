@@ -152,3 +152,11 @@ docs/build/
 
 # Experimental results
 results/
+
+# Claude AI assistant files
+.claude/
+CLAUDE.md
+
+# Temporary experiment files
+*_config.json
+*_results/
