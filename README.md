@@ -141,30 +141,51 @@ CLEAR-E/
 │   ├── PatchTST.py              # Patch-based Transformer
 │   ├── iTransformer.py          # Inverted Transformer
 │   ├── DLinear.py               # Decomposition Linear
-│   └── ...                      # Additional models
+│   ├── Linear.py, NLinear.py    # Linear models
+│   ├── RLinear.py               # Reversible Linear
+│   ├── Autoformer.py            # Autoformer architecture
+│   ├── Transformer.py           # Standard Transformer
+│   ├── Crossformer.py           # Cross-dimension Transformer
+│   ├── Informer.py              # Informer model
+│   ├── TCN.py, TCN_RevIN.py     # Temporal Convolutional Networks
+│   ├── OneNet.py                # OneNet online learning
+│   └── FSNet.py                 # Feature-based adaptation
 ├── 📂 data_provider/             # Data loading and preprocessing
 │   ├── data_factory.py          # Dataset factory
 │   └── data_loader.py           # Custom data loaders
+├── 📂 layers/                    # Neural network components
+│   ├── PatchTST_backbone.py     # PatchTST core layers
+│   ├── Transformer_EncDec.py    # Transformer encoder/decoder
+│   ├── SelfAttention_Family.py  # Attention mechanisms
+│   ├── Embed.py                 # Embedding layers
+│   ├── RevIN.py                 # Reversible normalization
+│   └── ts2vec/                  # Time series representation learning
+├── 📂 exp/                       # Experiment configurations
+│   ├── exp_main.py              # Main experiment class
+│   ├── exp_clear_e.py           # CLEAR-E specific experiments
+│   └── exp_online.py            # Online learning experiments
 ├── 📂 experiments/               # Experimental framework
 │   ├── run_experiments.py       # Main experiment runner
+│   ├── experimental_framework.py # Core framework
+│   ├── baseline_models.py       # Baseline implementations
 │   └── config/                  # Experiment configurations
-├── 📂 results/                   # Experimental results
-│   ├── comprehensive_experiments/
-│   └── paper_tables/
-├── 📂 paper/                     # Research paper and figures
-│   ├── paper.pdf                # Main paper
-│   ├── figures/                 # Publication-ready figures
-│   └── references.bib           # Bibliography
-├── 📂 dataset/                   # Energy datasets
-│   ├── ECL.csv                  # Electricity Consuming Load
-│   ├── ETTh1.csv, ETTh2.csv     # Electricity Transformer (hourly)
-│   ├── ETTm1.csv, ETTm2.csv     # Electricity Transformer (15-min)
-│   └── gefcom2014.csv           # GEFCom2014 competition data
 ├── 📂 util/                      # Utility functions
 │   ├── metrics.py               # Evaluation metrics
-│   └── tools.py                 # Helper functions
-└── 📄 requirements.txt           # Python dependencies
+│   ├── tools.py                 # Helper functions
+│   ├── timefeatures.py          # Time feature engineering
+│   └── buffer.py                # Memory buffer utilities
+├── 📂 scripts/                   # Training and submission scripts
+│   ├── online/                  # Online learning scripts
+│   └── pretrain/                # Pre-training scripts
+├── 📄 run.py                     # Main training script
+├── 📄 settings.py                # Global configuration
+├── 📄 generate_paper_tables.py   # Paper table generation
+├── 📄 run_comprehensive_experiments.py # Full experimental suite
+├── 📄 requirements.txt           # Python dependencies
+└── 📄 LICENSE                    # MIT License
 ```
+
+**Note:** The `dataset/`, `results/`, `paper/`, `checkpoints/`, and `logs/` directories are excluded from version control via `.gitignore` to keep the repository clean and focused on code.
 
 ## 📊 Datasets
 
