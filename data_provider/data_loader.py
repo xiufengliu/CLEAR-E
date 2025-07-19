@@ -19,6 +19,21 @@ def get_alldata(filename='electricity.csv', root_path='./'):
         df = pd.read_csv(path)
         if filename.startswith('wind'):
             df['date'] = pd.date_range(start='2000-01-01', periods=len(df), freq='H')
+        elif filename == 'ECL.csv':
+            # ECL dataset has 'datetime' column, rename to 'date'
+            if 'datetime' in df.columns:
+                df = df.rename(columns={'datetime': 'date'})
+        elif filename == 'gefcom2014.csv':
+            # gefcom2014 dataset has 'datetime' column, rename to 'date'
+            if 'datetime' in df.columns:
+                df = df.rename(columns={'datetime': 'date'})
+        elif filename == 'southern_china.csv':
+            # southern_china dataset has 'hour' column, create proper date column
+            if 'hour' in df.columns:
+                # Create a proper datetime index starting from 2022-01-01
+                df['date'] = pd.date_range(start='2022-01-01', periods=len(df), freq='H')
+                # Remove the original 'hour' column as it's now redundant
+                df = df.drop(columns=['hour'])
     else:
         if filename.startswith('nyc'):
             import h5py

@@ -550,10 +550,16 @@ class ClearE(nn.Module):
                 self.backbone.get_submodule(name).assign_adaptation(adaptation[i])
 
         # Forward through backbone
-        if self.args.do_predict:
-            return self.backbone(*x)
+        # For DLinear and similar models that only take one input
+        if hasattr(self.backbone, 'forward') and self.backbone.__class__.__name__ in ['Model']:
+            # DLinear only takes the time series input, not the time marks
+            return self.backbone(x[0])
         else:
-            return self.backbone(*x)
+            # For other models that might need multiple inputs
+            if self.args.do_predict:
+                return self.backbone(*x)
+            else:
+                return self.backbone(*x)
 
     def freeze_adapter(self, freeze: bool):
         """Freeze/unfreeze adapter parameters"""

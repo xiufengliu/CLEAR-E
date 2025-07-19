@@ -40,7 +40,9 @@ class SamePadConv(nn.Module):
         self.chunk_in_d = self.dim // self.n_chunks
         self.chunk_out_d = int(in_channels*kernel_size// self.n_chunks)
         
-        self.grads = torch.Tensor(sum(self.grad_dim)).fill_(0).cuda()
+        # Use CPU if CUDA is not available
+        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+        self.grads = torch.Tensor(sum(self.grad_dim)).fill_(0).to(device)
         self.f_grads = torch.Tensor(sum(self.grad_dim)).fill_(0).cuda()
         nh=64
         self.controller = nn.Sequential(nn.Linear(self.chunk_in_d, nh), nn.SiLU())

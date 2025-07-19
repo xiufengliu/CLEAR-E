@@ -49,9 +49,28 @@ class Model_Ensemble(nn.Module):
             #     self.encoder.load_state_dict(torch.load(args.fsnet_path)['model'])
         self.encoder_time = backbone
 
-    def forward_individual(self, x, x_mark):
+    def forward_individual(self, x, x_mark, mask=None):
+        # Handle tensor dimensions properly
+        if x.dim() == 3:
+            batch_size, seq_len, features = x.shape
+        else:
+            raise ValueError(f"Expected 3D tensor, got {x.dim()}D")
+        
+        # Ensure proper sequence length
+        if seq_len < self.seq_len:
+            # Pad if too short
+            padding = torch.zeros(batch_size, self.seq_len - seq_len, features, device=x.device)
+            x = torch.cat([padding, x], dim=1)
+        elif seq_len > self.seq_len:
+            # Truncate if too long
+            x = x[:, -self.seq_len:, :]
+        
         y1 = self.encoder_time(x, x_mark)
-        y2 = self.encoder.forward(x[..., -self.seq_len:, :], x_mark[..., -self.seq_len:, :] if x_mark is not None else None)
+        # Handle tensor dimension mismatch by adjusting input size
+        seq_len = min(self.seq_len, x.shape[-2])
+        x_input = x[..., -seq_len:, :]
+        x_mark_input = x_mark[..., -seq_len:, :] if x_mark is not None else None
+        y2 = self.encoder.forward(x_input, x_mark_input)
         return y1, y2
 
     def forward(self, x, x_mark, w1=0.5, w2=0.5):

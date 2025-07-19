@@ -126,6 +126,7 @@ parser.add_argument('--distil', action='store_false',
 parser.add_argument('--dropout', type=float, default=0.05, help='dropout')
 parser.add_argument('--embed', type=str, default='timeF',
                     help='time features encoding, options:[timeF, fixed, learned]')
+parser.add_argument('--use_time', action='store_true', help='whether to use time features')
 parser.add_argument('--activation', type=str, default='gelu', help='activation')
 parser.add_argument('--output_attention', action='store_true', help='whether to output attention in encoder')
 parser.add_argument('--output_enc', action='store_true', help='whether to output embedding from encoder')
