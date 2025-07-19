@@ -252,23 +252,6 @@ pip install -e .
 - 📝 **Documentation**: Tutorials, examples, API documentation
 - 🧪 **Testing**: Unit tests, integration tests, benchmarking
 
-## 📚 Citation
-
-If you use CLEAR-E in your research, please cite our paper:
-
-```bibtex
-@article{clear_e_2024,
-  title={CLEAR-E: Concept Learning and Energy-Aware Adaptation for Smart Grid Load Forecasting},
-  author={[Authors]},
-  journal={IEEE Transactions on Neural Networks and Learning Systems},
-  year={2024},
-  volume={XX},
-  number={XX},
-  pages={XX-XX},
-  doi={10.1109/TNNLS.2024.XXXXXXX}
-}
-```
-
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

@@ -253,20 +253,6 @@ The framework ensures reproducibility through:
 3. **Memory Management**: Use mixed precision training if available
 4. **Caching**: Enable dataset caching for repeated experiments
 
-## Citation
-
-If you use this experimental framework, please cite:
-
-```bibtex
-@article{clear_e_2025,
-  title={CLEAR-E: Concept-aware Lightweight Energy Adaptation for Smart Grid Load Forecasting},
-  author={[Author Names]},
-  journal={IEEE Transactions on Smart Grid},
-  year={2025},
-  note={Submitted}
-}
-```
-
 ## License
 
 This experimental framework is provided for academic and research purposes. Please ensure proper attribution when using or extending the code.
